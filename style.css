@@ -6,10 +6,17 @@
 }
 
 body {
+    --bg: #f6f9fc;
+    --text: #0b1320;
+    --muted: #6b7280;
+    --accent: #f59e0b;
+    --card: #ffffff;
+    --glass: rgba(255,255,255,0.8);
+
     font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     line-height: 1.6;
-    color: #0b1320;
-    background: linear-gradient(180deg, #fbfdff 0%, #f6f9fc 100%);
+    color: var(--text);
+    background: linear-gradient(180deg, #fbfdff 0%, var(--bg) 100%);
     -webkit-font-smoothing:antialiased;
 }
 
@@ -49,8 +56,8 @@ a {
 }
 .logo span { color: #f59e0b }
 .site-nav ul { list-style: none; display:flex; gap:20px; align-items:center }
-.site-nav ul li a { font-weight:600; color: #0b1320 }
-.site-nav ul li a:hover { color: #f59e0b }
+.site-nav ul li a { font-weight:600; color: var(--text) }
+.site-nav ul li a:hover { color: var(--accent) }
 
 /* HERO */
 .hero {
@@ -58,35 +65,18 @@ a {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 100px 20px;
-    background: linear-gradient(90deg, rgba(6,22,40,0.6), rgba(6,22,40,0.35)), url('images/hero.jpg') center/cover no-repeat;
-    color: #fff;
-    position: relative;
-    border-bottom-left-radius: 14px;
-    border-bottom-right-radius: 14px;
-    box-shadow: 0 12px 40px rgba(11,19,32,0.06);
+    padding: 64px 20px;
+    background: linear-gradient(180deg, rgba(6,22,40,0.08), rgba(6,22,40,0.02));
 }
-.hero::after{content:"";position:absolute;inset:0;pointer-events:none}
-.hero-content{position:relative;max-width:900px;z-index:2;padding:8px 16px}
+.hero-content{position:relative;max-width:900px;z-index:2;padding:10px 16px}
 /* the .hero-media element exists in the HTML; hide it by default to avoid layout issues
    (background is applied to .hero). If you prefer using .hero-media for background,
    move the background-image there and remove it from .hero. */
 .hero-media{display:none}
-.hero .eyebrow {
-    font-weight: 600;
-    margin-bottom: 15px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-.hero h1{font-family:'Playfair Display',serif;font-size:40px;margin-bottom:14px}
-.hero p.lead{font-size:18px;margin-bottom:22px;color:rgba(255,255,255,0.9)}
-.hero-ctas .btn {
-    margin: 5px;
-    padding: 12px 28px;
-    font-weight: 600;
-    border-radius: 5px;
-    transition: all 0.3s;
-}
+.hero .eyebrow { font-weight: 600; margin-bottom: 10px; letter-spacing: 1.4px; text-transform: uppercase; color:var(--muted); font-size:12px }
+.hero h1{font-family:'Playfair Display',serif;font-size:34px;margin-bottom:12px}
+.hero p.lead{font-size:16px;margin-bottom:18px;color:var(--muted)}
+.hero-ctas .btn{margin:6px;padding:10px 20px;border-radius:8px}
 .btn {
     background-color: #fca311;
     color: #fff;
@@ -125,8 +115,8 @@ a {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
 }
-.service-card{background-color:#fff;padding:22px;border-radius:12px;border:1px solid rgba(11,19,32,0.04);transition:transform .28s,box-shadow .28s}
-.service-card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(11,19,32,0.06)}
+.service-card{background-color:var(--card);padding:20px;border-radius:10px;border:1px solid rgba(11,19,32,0.04);transition:transform .28s,box-shadow .28s}
+.service-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(11,19,32,0.06)}
 .service-card .icon {
     font-size: 40px;
     margin-bottom: 15px;
@@ -185,7 +175,7 @@ cite {
     margin-bottom: 10px;
 }
 .contact-form input,.contact-form textarea{width:100%;padding:12px;margin-bottom:15px;border:1px solid rgba(11,19,32,0.06);border-radius:8px}
-.contact-form button{width:100%;padding:12px;background:linear-gradient(90deg,#f59e0b,#fca311);border:none;color:#081123;font-weight:700;border-radius:8px;cursor:pointer}
+.contact-form button{width:100%;padding:12px;background:linear-gradient(90deg,var(--accent),#fca311);border:none;color:#081123;font-weight:700;border-radius:8px;cursor:pointer}
 .contact-form button:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(11,19,32,0.06)}
 
 /* Form alert box (status messages) */
@@ -195,7 +185,7 @@ cite {
 
 /* Plan CTA buttons and badge */
 .plan-cta{margin-left:12px;padding:6px 10px;font-size:13px;border-radius:6px}
-.plan-badge{background:#f59e0b;color:#081123;padding:4px 8px;border-radius:999px;font-size:12px;margin-left:8px;font-weight:800}
+.plan-badge{background:var(--accent);color:#081123;padding:4px 8px;border-radius:999px;font-size:12px;margin-left:8px;font-weight:800}
 
 /* Buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 14px;border-radius:8px;border:0;font-weight:700}
@@ -229,9 +219,9 @@ cite {
 .input-error{outline:none;border-color:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,0.08)}
 
 /* Inline WhatsApp action inside contact */
-.contact-extra{background:linear-gradient(180deg,#ffffff,#fbfdff);padding:18px;border-radius:12px;border:1px solid rgba(11,19,32,0.04);margin-top:6px}
-.contact-extra{color:#0b1320}
-.contact-extra a{color:#0b1320}
+.contact-extra{background:linear-gradient(180deg,var(--card),#fbfdff);padding:16px;border-radius:10px;border:1px solid rgba(11,19,32,0.04);margin-top:6px}
+.contact-extra{color:var(--text)}
+.contact-extra a{color:var(--text)}
 .whatsapp-inline{background:#25d366;color:white;padding:8px 12px;border-radius:8px}
 .muted{color:#6b7280;font-size:14px}
 
@@ -249,14 +239,21 @@ cite {
 @media (max-width: 768px) {
     .nav-toggle {
         display: block;
-        padding: 6px 8px;
+        padding: 10px 12px;
         background: rgba(255,255,255,0.9);
         border-radius: 8px;
         border: 1px solid rgba(11,19,32,0.06);
         /* ensure the toggle is above other header content on small screens */
         z-index: 110;
         touch-action: manipulation; /* improve touch responsiveness */
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
+
+/* debug indicator removed */
     .site-nav {
         display: none;
         flex-direction: column;
@@ -266,30 +263,50 @@ cite {
         flex-direction: column;
         gap: 15px;
     }
+    /* Ensure nav-open is enforced on mobile even if other rules exist */
+    .site-nav.nav-open {
+        display: block !important;
+        visibility: visible;
+        opacity: 1;
+        max-height: 800px;
+        overflow: auto;
+    }
 }
 
 /* Make nav-open visible on mobile with a short animation */
-.site-nav.nav-open {
-    display: block;
-    animation: navFade .18s ease-out;
-}
+.site-nav.nav-open { display:block; animation: navFade .18s ease-out; }
 
 @keyframes navFade {
     from { opacity: 0; transform: translateY(-6px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Mobile dropdown behavior: make the nav appear as an overlay under the header */
+@media (max-width: 768px) {
+    .site-header { position: sticky; top: 0; z-index: 200; }
+    .site-nav.nav-open {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 12px 16px;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        box-shadow: 0 8px 30px rgba(11,19,32,0.12);
+        z-index: 210; /* ensure nav sits above the header */
+    }
+}
+
 /* FAQ accordion */
 .faq-list { max-width: 900px; margin: 0 auto; text-align: left; display: grid; gap: 12px }
-.faq-list details { background: #fff; padding: 16px; border-radius: 10px; border: 1px solid rgba(11,19,32,0.04) }
+.faq-list details { background: var(--card); padding: 16px; border-radius: 10px; border: 1px solid rgba(11,19,32,0.04) }
 .faq-list summary { font-weight: 700; cursor: pointer; list-style: none }
 .faq-list summary::-webkit-details-marker { display:none }
-.faq-body { margin-top: 10px; color: #374151 }
+.faq-body { margin-top: 10px; color: var(--muted) }
 
 /* ===== Buttons ===== */
-.btn {
-    transition: all 0.3s ease;
-}
+.btn { transition: transform 0.3s ease, background 0.3s ease; }
 
 /* ===== Scroll Animations ===== */
 .section, .hero {

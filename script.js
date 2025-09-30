@@ -1,16 +1,20 @@
-// Main site JavaScript (externalized from index.html)
-// Handles mobile nav toggle, smooth scrolling, button hover effects, fake form submission for demo, and scroll animations.
-
 document.addEventListener('DOMContentLoaded', () => {
-  // ===== Mobile Nav Toggle =====
+  // Mobile nav toggle
   const navToggle = document.querySelector('.nav-toggle');
   const siteNav = document.querySelector('.site-nav');
 
-  // Helper to close nav
+  // Helper to close nav and clear inline fallbacks
   function closeMobileNav() {
     if (!navToggle || !siteNav) return;
     navToggle.setAttribute('aria-expanded', 'false');
     siteNav.classList.remove('nav-open');
+    // Clear inline fallback styles when closing
+    try {
+      siteNav.style.display = '';
+      siteNav.style.visibility = '';
+      siteNav.style.opacity = '';
+      siteNav.style.maxHeight = '';
+    } catch (err) { }
   }
 
   if (navToggle && siteNav) {
@@ -23,30 +27,40 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Use a single toggle function and pointer events for better touch reliability
+  // Toggle function (debounced)
+    let _navToggleGuard = false; // debounce guard to avoid duplicate triggers
     function toggleMobileNav() {
-      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-      if (expanded) {
-        closeMobileNav();
+      if (_navToggleGuard) return;
+      _navToggleGuard = true;
+      setTimeout(() => { _navToggleGuard = false; }, 250);
+
+      const isOpen = siteNav.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+      if (isOpen) {
+        // inline style fallback
+        try {
+          siteNav.style.display = 'block';
+          siteNav.style.visibility = 'visible';
+          siteNav.style.opacity = '1';
+          siteNav.style.maxHeight = '800px';
+        } catch (err) { }
       } else {
-        navToggle.setAttribute('aria-expanded', 'true');
-        siteNav.classList.add('nav-open');
+        // ensure inline styles cleared when closing
+        try {
+          siteNav.style.display = '';
+          siteNav.style.visibility = '';
+          siteNav.style.opacity = '';
+          siteNav.style.maxHeight = '';
+        } catch (err) { }
       }
     }
 
-    // Prefer pointerup for broad device support; fall back to touchend and click
     if (window.PointerEvent) {
-      navToggle.addEventListener('pointerup', (ev) => {
-        // ignore non-primary buttons
-        if (ev.button && ev.button !== 0) return;
-        ev.preventDefault();
-        toggleMobileNav();
-      });
-    } else {
-      // older browsers / devices
-      navToggle.addEventListener('touchend', (ev) => { ev.preventDefault(); toggleMobileNav(); }, { passive: false });
-      navToggle.addEventListener('click', (ev) => { ev.preventDefault(); toggleMobileNav(); });
+      navToggle.addEventListener('pointerup', (ev) => { if (!ev.button || ev.button === 0) toggleMobileNav(); });
+      navToggle.addEventListener('pointercancel', () => { _navToggleGuard = false; });
     }
+    navToggle.addEventListener('click', () => toggleMobileNav());
 
     // Close when clicking outside the nav on mobile
     document.addEventListener('click', (ev) => {
