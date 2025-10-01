@@ -86,15 +86,25 @@ document.addEventListener('DOMContentLoaded', () => {
       if (targetEl) {
         e.preventDefault();
         targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
         // Close mobile nav after clicking a link
         if (siteNav && siteNav.classList.contains('nav-open')) {
-          siteNav.classList.remove('nav-open');
-          if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+          closeMobileNav();
         }
       }
     });
   });
+
+  // Ensure any nav link closes mobile nav (covers links without data-scroll)
+  if (siteNav) {
+    siteNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (siteNav.classList.contains('nav-open')) {
+          // small delay to allow default behavior (if any) to proceed
+          setTimeout(() => closeMobileNav(), 40);
+        }
+      });
+    });
+  }
 
   // ===== Button Hover Animation (pure CSS preferred, this is gentle enhancement) =====
   document.querySelectorAll('.btn').forEach(btn => {
