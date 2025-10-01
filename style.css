@@ -206,6 +206,9 @@ cite {
     color: #fca311;
     font-weight: 600;
 }
+/* Back to top link styling */
+.back-to-top{display:inline-block;margin-top:12px;color:#fff;background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px}
+.back-to-top:hover{opacity:0.95}
 /* ===== Mobile Nav ===== */
 .nav-toggle {
     display: none;
